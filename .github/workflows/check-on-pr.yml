@@ -3,20 +3,19 @@ name: Check code with eslint
 on:
     pull_request:
         branches:
-            - master
+            - main
 
 jobs:
     check:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: actions/setup-node@v3
               with:
-                  node-version: "16"
-                  check-latest: true
-            - name: Check
-              run: |
-                  yarn build
-              env:
-                  BASE: ${{ github.base_ref }}
-                  HEAD: ${{ github.head_ref }}
+                  node-version: "16.14.2"
+                  
+            - name: Install dependencies
+              run: yarn install
+              
+            - name: Next Build Test
+              run: yarn build
