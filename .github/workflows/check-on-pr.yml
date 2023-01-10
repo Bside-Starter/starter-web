@@ -1,4 +1,4 @@
-name: Check code with eslint
+name: Check build test
 
 on:
     pull_request:
