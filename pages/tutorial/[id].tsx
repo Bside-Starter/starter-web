@@ -17,6 +17,7 @@ const TutorialPage = () => {
   const handleNext = () => {
     if (isLast) {
       ParsedStorage.  
+      ParsedStorage.setItem("isTutorialViewed", true);
       replaceNavigation(routes.SIGN_IN);
     } else {
       pushNavigation(`${routes.TUTORIAL}/${id + 1}`);
@@ -26,7 +27,7 @@ const TutorialPage = () => {
   const handleSkip = () => {};
   return (
     <Container>
-      <Typo>빌드 체크 테스트 중2</Typo>
+      <Typo>배포 테스트 중2</Typo>
       <div>
         <Title>{matchedItem?.title}</Title>
         <Desc>{matchedItem?.desc}</Desc>
