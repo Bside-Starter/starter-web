@@ -16,7 +16,7 @@ const TutorialPage = () => {
   const matchedItem = tutorialList.find((v) => v.id === id);
   const handleNext = () => {
     if (isLast) {
-      ParsedStorage.setItem("isTutorialViewed", true);
+      ParsedStorage.
       replaceNavigation(routes.SIGN_IN);
     } else {
       pushNavigation(`${routes.TUTORIAL}/${id + 1}`);
