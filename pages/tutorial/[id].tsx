@@ -26,7 +26,7 @@ const TutorialPage = () => {
   const handleSkip = () => {};
   return (
     <Container>
-      <Typo>빌드 체크 테스트 중1</Typo>
+      <Typo>빌드 체크 테스트 중2</Typo>
       <div>
         <Title>{matchedItem?.title}</Title>
         <Desc>{matchedItem?.desc}</Desc>
