@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Button from "~/components/Button";
+import Typo from "~/components/Typo";
 import routes from "~/constants/routes";
 import { useInterface } from "~/utils/interface";
 import { ParsedStorage } from "~/utils/storage";
@@ -25,6 +26,7 @@ const TutorialPage = () => {
   const handleSkip = () => {};
   return (
     <Container>
+      <Typo>배포 테스트 중</Typo>
       <div>
         <Title>{matchedItem?.title}</Title>
         <Desc>{matchedItem?.desc}</Desc>
