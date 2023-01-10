@@ -1,4 +1,4 @@
-name: git push into another repo to deploy to vercel
+name: git push into deploy repo before deploy
 
 on:
   push:
@@ -21,8 +21,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: 'output'
-          destination-github-username: sogeun/sogeun-web-deploy
-          destination-repository-name: sogeun/sogeun-web-deploy
+          destination-github-username: https://github.com/sogeun/sogeun-web-deploy.git
+          destination-repository-name: https://github.com/sogeun/sogeun-web-deploy.git
           user-email: ${{ secrets.OFFICIAL_ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
