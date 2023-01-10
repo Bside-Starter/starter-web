@@ -17,7 +17,6 @@ const TutorialPage = () => {
   const handleNext = () => {
     if (isLast) {
       ParsedStorage.  
-      ParsedStorage.setItem("isTutorialViewed", true);
       replaceNavigation(routes.SIGN_IN);
     } else {
       pushNavigation(`${routes.TUTORIAL}/${id + 1}`);
