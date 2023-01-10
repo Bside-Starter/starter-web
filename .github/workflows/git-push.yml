@@ -21,8 +21,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: 'output'
-          destination-github-username: sogeun/sogeun-web-deploy.git
-          destination-repository-name: sogeun/sogeun-web-deploy.git
+          destination-github-username: sogeun
+          destination-repository-name: sogeun-web-deploy
           user-email: ${{ secrets.OFFICIAL_ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
