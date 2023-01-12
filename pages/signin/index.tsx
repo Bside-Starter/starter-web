@@ -18,7 +18,7 @@ const SignIn = () => {
   const router = useRouter();
   const history = useHistoryManager();
   const { setToken } = useAuthActions();
-
+  console.log("test");
   const { pushNavigation, replaceNavigation } = useInterface();
 
   const handleSocialSignIn = (provider: SocialProvider) => () => {
