@@ -55,6 +55,9 @@ const RNListener = ({ children }: PropsWithChildren) => {
             },
           });
           break;
+        case WebViewMessageType.GO_BACK:
+          router.back();
+          break;
         default:
           break;
       }
