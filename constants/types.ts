@@ -11,6 +11,7 @@ export enum WebViewMessageType {
   PUSH_NAVIGATION = "PUSH_NAVIGATION",
   REPLACE_NAVIGATION = "REPLACE_NAVIGATION",
   POP_NAVIGATION = "POP_NAVIGATION",
+  GO_BACK = "GO_BACK",
 }
 
 export interface WebViewMessage<T> {
