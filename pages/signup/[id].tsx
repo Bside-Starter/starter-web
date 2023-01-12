@@ -8,6 +8,7 @@ import routes from "~/constants/routes";
 import TextField from "~/components/TextField";
 
 const SignUp = () => {
+  console.log("test");
   const router = useRouter();
   const { pushNavigation, replaceNavigation } = useInterface();
   const id = parseInt(router.query.id as string, 10);
