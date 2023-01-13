@@ -18,7 +18,6 @@ const SignIn = () => {
   const router = useRouter();
   const history = useHistoryManager();
   const { setToken } = useAuthActions();
-  console.log("test");
   const { pushNavigation, replaceNavigation } = useInterface();
 
   const handleSocialSignIn = (provider: SocialProvider) => () => {
@@ -48,7 +47,7 @@ const SignIn = () => {
       <Content>
         <div className={"input"}>
           <TextField placeholder={"아이디 입력"} />
-          <TextField placeholder={"비밀번호 입력"} />
+          <TextField type={"password"} placeholder={"비밀번호 입력"} />
         </div>
         <div className={"social"}>
           <Button>카카오로 계속하기</Button>
@@ -71,17 +70,11 @@ const Container = styled.main`
 `;
 
 const Header = styled.div`
-  width: 375px;
   height: 56px;
   left: -0.5px;
   top: 60px;
 
-  font-family: "Pretendard", serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  /* identical to box height, or 150% */
+  ${({ theme }) => theme.typo.B3_R}
 
   display: flex;
   align-items: center;
@@ -99,7 +92,7 @@ const Content = styled.div`
   height: 100%;
 
   .input {
-    height: 140px;
+    height: 142px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -131,12 +124,7 @@ const Footer = styled.div`
   left: 19.66px;
   top: 710px;
 
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  /* identical to box height, or 150% */
+  ${({ theme }) => theme.typo.B3_R}
 
   text-align: center;
   letter-spacing: -0.01em;
