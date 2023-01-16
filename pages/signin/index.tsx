@@ -50,6 +50,7 @@ const SignIn = () => {
           <TextField type={"password"} placeholder={"비밀번호 입력"} />
         </div>
         <div className={"social"}>
+          <Button>로그인</Button>
           <Button>카카오로 계속하기</Button>
           <Button>애플로 계속하기</Button>
         </div>
@@ -99,10 +100,11 @@ const Content = styled.div`
   }
 
   .social {
-    height: 120px;
+    //height: 120px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    //justify-content: space-between;
+    gap: 24px;
 
     button {
       background-color: yellow;
