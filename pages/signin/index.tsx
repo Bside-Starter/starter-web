@@ -15,11 +15,8 @@ import TextField from "~/components/TextField";
 import { useInterface } from "~/utils/interface";
 
 const SignIn = () => {
-  const router = useRouter();
-  const history = useHistoryManager();
   const { setToken } = useAuthActions();
-
-  const { pushNavigation, replaceNavigation } = useInterface();
+  const { pushNavigation, clearNavigation } = useInterface();
 
   const handleSocialSignIn = (provider: SocialProvider) => () => {
     // @ts-ignore
@@ -34,13 +31,9 @@ const SignIn = () => {
     } else {
       // 웹 소셜 로그인
       setToken("temp token");
-      router.push(routes.HOME);
+      clearNavigation({ nextUrl: routes.HOME });
     }
   };
-
-  useEffect(() => {
-    history.disableGoBack();
-  }, [history]);
 
   return (
     <Container>
@@ -48,14 +41,17 @@ const SignIn = () => {
       <Content>
         <div className={"input"}>
           <TextField placeholder={"아이디 입력"} />
-          <TextField placeholder={"비밀번호 입력"} />
+          <TextField type={"password"} placeholder={"비밀번호 입력"} />
         </div>
         <div className={"social"}>
-          <Button>카카오로 계속하기</Button>
+          <Button>로그인</Button>
+          <Button onClick={handleSocialSignIn("kakao")}>
+            카카오로 계속하기
+          </Button>
           <Button>애플로 계속하기</Button>
         </div>
       </Content>
-      <Footer onClick={() => replaceNavigation(`${routes.SIGN_UP}/${1}`)}>
+      <Footer onClick={() => pushNavigation(`${routes.SIGN_UP}/${1}`)}>
         이메일 회원가입하기
       </Footer>
     </Container>
@@ -71,17 +67,11 @@ const Container = styled.main`
 `;
 
 const Header = styled.div`
-  width: 375px;
   height: 56px;
   left: -0.5px;
   top: 60px;
 
-  font-family: "Pretendard", serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  /* identical to box height, or 150% */
+  ${({ theme }) => theme.typo.B3_R}
 
   display: flex;
   align-items: center;
@@ -99,17 +89,18 @@ const Content = styled.div`
   height: 100%;
 
   .input {
-    height: 140px;
+    height: 142px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
   .social {
-    height: 120px;
+    //height: 120px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    //justify-content: space-between;
+    gap: 24px;
 
     button {
       background-color: yellow;
@@ -126,17 +117,12 @@ const Footer = styled.div`
   gap: 10px;
 
   //position: absolute;
-  width: 335px;
+  width: 100%;
   height: 44px;
   left: 19.66px;
   top: 710px;
 
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  /* identical to box height, or 150% */
+  ${({ theme }) => theme.typo.B3_R}
 
   text-align: center;
   letter-spacing: -0.01em;

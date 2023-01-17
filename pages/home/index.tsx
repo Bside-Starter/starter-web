@@ -1,7 +1,5 @@
-import { useRouter } from "next/router";
-import { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 import styled from "styled-components";
-import useHistoryManager from "~/hooks/useHistoryManager";
 import { axiosUtils } from "~/network/axiosUtils";
 import defaultRequest from "~/network/defaultRequest";
 import MainTabLayout from "../../components/MainTabLayout";
@@ -10,8 +8,6 @@ import { NextPageWithLayout } from "../_app";
 import TextField from "~/components/TextField";
 
 const Home: NextPageWithLayout = () => {
-  const router = useRouter();
-  const history = useHistoryManager();
   const handleTestButtonClick = () => {
     try {
       defaultRequest({
@@ -25,11 +21,7 @@ const Home: NextPageWithLayout = () => {
       console.error(e);
     }
   };
-  // router.push('/home/123');
 
-  useEffect(() => {
-    history.disableGoBack();
-  }, [history]);
   return (
     <Container>
       <button onClick={handleTestButtonClick}>테스트 버튼</button>

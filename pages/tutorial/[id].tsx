@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Button from "~/components/Button";
-import Typo from "~/components/Typo";
 import routes from "~/constants/routes";
 import { useInterface } from "~/utils/interface";
 import { ParsedStorage } from "~/utils/storage";
 
 const TutorialPage = () => {
   const router = useRouter();
-  const { pushNavigation, replaceNavigation } = useInterface();
+  const { pushNavigation, clearNavigation } = useInterface();
   const id = parseInt(router.query.id as string, 10);
 
   const isLast = id === tutorialList.length;
@@ -17,16 +16,16 @@ const TutorialPage = () => {
   const handleNext = () => {
     if (isLast) {
       ParsedStorage.setItem("isTutorialViewed", true);
-      replaceNavigation(routes.SIGN_IN);
+      clearNavigation({
+        nextUrl: routes.SIGN_IN,
+      });
     } else {
       pushNavigation(`${routes.TUTORIAL}/${id + 1}`);
     }
   };
 
-  const handleSkip = () => {};
   return (
     <Container>
-      <Typo>배포 테스트 중2</Typo>
       <div>
         <Title>{matchedItem?.title}</Title>
         <Desc>{matchedItem?.desc}</Desc>
@@ -42,15 +41,7 @@ const TutorialPage = () => {
             />
           </>
         ) : (
-          <>
-            <Button title={"다음"} hasNextButton onClick={handleNext} />
-            <Button
-              title={"우선 둘러보기"}
-              buttonType={"outline"}
-              hasNextButton
-              onClick={handleSkip}
-            />
-          </>
+          <Button title={"다음"} hasNextButton onClick={handleNext} />
         )}
       </ButtonWrap>
     </Container>
@@ -79,7 +70,6 @@ const ButtonWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 2.4rem;
 `;
 
 export default TutorialPage;

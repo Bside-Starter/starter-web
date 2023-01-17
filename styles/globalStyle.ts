@@ -23,6 +23,10 @@ export const GlobalStyle = createGlobalStyle`
     ${({ theme }) => theme.typo.H2_B}
   }
 
+  h3 {
+    ${({ theme }) => theme.typo.H3_B}
+  }
+
   @font-face {
     font-family: Pretendard;
     src: url('/fonts/Pretendard-Bold.otf');
@@ -60,5 +64,6 @@ export const GlobalStyle = createGlobalStyle`
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;;
     border: none;
     box-sizing: border-box;
+    background-color: transparent;
   }
 `;

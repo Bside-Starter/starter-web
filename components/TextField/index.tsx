@@ -1,17 +1,32 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
+import React from "react";
+import styled, { CSSProperties } from "styled-components";
 
 interface Props {
   label?: string;
   placeholder?: string;
   onChange?: () => {};
+  style?: CSSProperties;
+  type?: string;
 }
 
-const TextField = ({ label, placeholder, onChange, ...rest }: Props) => {
+const TextField = ({
+  label,
+  placeholder,
+  onChange,
+  style,
+  type,
+  ...rest
+}: Props) => {
   return (
     <Container label={label}>
       {label && <Label>{label}</Label>}
-      <EleInput {...rest} onChange={onChange} placeholder={placeholder} />
+      <EleInput
+        style={style}
+        type={type}
+        onChange={onChange}
+        placeholder={placeholder}
+        {...rest}
+      />
     </Container>
   );
 };
@@ -30,11 +45,8 @@ const Label = styled.label`
   order: 0;
   flex-grow: 0;
 
-  font-family: "Pretendard", "serif";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
+  ${({ theme }) => theme.typo.B4_R}
+
   letter-spacing: -0.01em;
 
   color: #ffffff;
@@ -64,8 +76,9 @@ const EleInput = styled.input`
 
   background-color: transparent;
 
-  font-family: "Pretendard", "serif";
   color: white;
+
+  ${({ theme }) => theme.typo.B3_R}
 `;
 
 const Container = styled.div<{ label?: string }>`

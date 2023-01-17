@@ -28,10 +28,12 @@ const SignUp = () => {
       content: (
         <FieldContainer>
           <TextField label={"이메일"} placeholder={"예) user@sample.com"} />
-          <>
-            <TextField label={"비밀번호"} placeholder={"비밀번호"} />
-            <TextField placeholder={"비밀번호 확인"} />
-          </>
+          <TextField
+            type={"password"}
+            label={"비밀번호"}
+            placeholder={"비밀번호"}
+          />
+          <TextField type={"password"} placeholder={"비밀번호 확인"} />
           <TextField
             label={"휴대폰번호"}
             placeholder={"휴대폰 번호를 입력해주세요."}
@@ -56,8 +58,9 @@ const SignUp = () => {
             <div className={"content"} ref={(el) => (inputRef.current[0] = el)}>
               Lorem ipsum dolor sit amet consectetur. Turpis in eu aliquam mi.
               Velit diam sed id imperdiet mauris amet non turpis. Id euismod
-              adipiscing et cras. Sapien ege tellus nibh adipiscing et cras.
-              Sapien egestas
+              Turpis in eu aliquam mi. Velit diam sed id imperdiet mauris amet
+              non turpis. Id euismod adipiscing et cras. Sapien ege tellus nibh
+              adipiscing et cras. Sapien egestas
             </div>
           </Agree>
           <Agree>
@@ -116,15 +119,11 @@ const FieldContainer = styled.div`
 
 const SignUpHeader = styled.div`
   position: absolute;
-  width: 375px;
+  //width: 375px;
   height: 56px;
   top: 50px;
 
-  font-family: "Pretendard", serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
+  ${({ theme }) => theme.typo.B3_R}
 `;
 
 const Agree = styled.div`
@@ -142,13 +141,7 @@ const Agree = styled.div`
   }
 
   .title {
-    font-family: "Pretendard", serif;
-
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    /* identical to box height, or 150% */
+    ${({ theme }) => theme.typo.B3_R}
 
     align-items: center;
     letter-spacing: -0.04em;
@@ -157,10 +150,7 @@ const Agree = styled.div`
   }
 
   .btn {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 22px;
-    /* identical to box height, or 157% */
+    ${({ theme }) => theme.typo.B4_R}
 
     display: flex;
     align-items: center;
@@ -170,16 +160,14 @@ const Agree = styled.div`
   }
 
   .content {
-    border-radius: 5px;
-
-    background: #e4eaf2;
-
-    font-family: "Pretendard", serif;
-    font-size: 12px;
-    line-height: 18px;
-
     display: flex;
     align-items: center;
+
+    border-radius: 5px;
+    background: #e4eaf2;
+
+    ${({ theme }) => theme.typo.B4_R}
+
     letter-spacing: -0.01em;
 
     color: #585c62;
@@ -192,8 +180,7 @@ const Agree = styled.div`
   }
 
   .active {
-    display: block;
-    height: 193.7px;
+    height: 194px;
     overflow-y: auto;
   }
 `;

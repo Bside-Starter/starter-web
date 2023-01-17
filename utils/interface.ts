@@ -21,7 +21,7 @@ export function useInterface() {
   };
 
   const pushNavigation = (url: string) => {
-    if (deviceInfo?.platform === "ios") {
+    if (deviceInfo?.platform === "ios" || deviceInfo?.platform === "android") {
       sendMessage<RoutePayload>({
         type: WebViewMessageType.PUSH_NAVIGATION,
         payload: { url },
@@ -32,7 +32,7 @@ export function useInterface() {
   };
 
   const replaceNavigation = (url: string) => {
-    if (deviceInfo?.platform === "ios") {
+    if (deviceInfo?.platform === "ios" || deviceInfo?.platform === "android") {
       sendMessage<RoutePayload>({
         type: WebViewMessageType.REPLACE_NAVIGATION,
         payload: { url },
@@ -43,7 +43,7 @@ export function useInterface() {
   };
 
   const popNavigation = () => {
-    if (deviceInfo?.platform === "ios") {
+    if (deviceInfo?.platform === "ios" || deviceInfo?.platform === "android") {
       sendMessage<RoutePayload>({
         type: WebViewMessageType.POP_NAVIGATION,
         payload: { url: "" },
@@ -52,11 +52,32 @@ export function useInterface() {
       router.back();
     }
   };
+
+  const clearNavigation = ({
+    nextUrl,
+    isPush = false,
+  }: {
+    nextUrl: string;
+    isPush?: boolean;
+  }) => {
+    if (deviceInfo?.platform === "ios" || deviceInfo?.platform === "android") {
+      sendMessage<RoutePayload>({
+        type: WebViewMessageType.CLEAR_NAVIGATION,
+        payload: {
+          url: nextUrl,
+        },
+      });
+    } else {
+      if (isPush) router.push(nextUrl);
+      else router.replace(nextUrl);
+    }
+  };
   return {
     webLoaded,
     initializeComplete,
     pushNavigation,
     replaceNavigation,
     popNavigation,
+    clearNavigation,
   };
 }

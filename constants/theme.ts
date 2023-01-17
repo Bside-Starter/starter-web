@@ -22,7 +22,7 @@ export enum FontType {
   PyeongChang = "PyeongChang",
 }
 
-export type FontWeightType = typeof fontWeights[keyof typeof fontWeights];
+export type FontWeightType = (typeof fontWeights)[keyof typeof fontWeights];
 
 const getTypo = (
   size: FontSizeType,
