@@ -15,10 +15,8 @@ import TextField from "~/components/TextField";
 import { useInterface } from "~/utils/interface";
 
 const SignIn = () => {
-  const router = useRouter();
-  const history = useHistoryManager();
   const { setToken } = useAuthActions();
-  const { pushNavigation, replaceNavigation } = useInterface();
+  const { pushNavigation, clearNavigation } = useInterface();
 
   const handleSocialSignIn = (provider: SocialProvider) => () => {
     // @ts-ignore
@@ -33,13 +31,9 @@ const SignIn = () => {
     } else {
       // 웹 소셜 로그인
       setToken("temp token");
-      router.push(routes.HOME);
+      clearNavigation({ nextUrl: routes.HOME });
     }
   };
-
-  useEffect(() => {
-    history.disableGoBack();
-  }, [history]);
 
   return (
     <Container>
@@ -123,7 +117,7 @@ const Footer = styled.div`
   gap: 10px;
 
   //position: absolute;
-  width: 335px;
+  width: 100%;
   height: 44px;
   left: 19.66px;
   top: 710px;

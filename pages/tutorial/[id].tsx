@@ -7,7 +7,7 @@ import { ParsedStorage } from "~/utils/storage";
 
 const TutorialPage = () => {
   const router = useRouter();
-  const { pushNavigation, replaceNavigation } = useInterface();
+  const { pushNavigation, clearNavigation } = useInterface();
   const id = parseInt(router.query.id as string, 10);
 
   const isLast = id === tutorialList.length;
@@ -16,7 +16,9 @@ const TutorialPage = () => {
   const handleNext = () => {
     if (isLast) {
       ParsedStorage.setItem("isTutorialViewed", true);
-      replaceNavigation(routes.SIGN_IN);
+      clearNavigation({
+        nextUrl: routes.SIGN_IN,
+      });
     } else {
       pushNavigation(`${routes.TUTORIAL}/${id + 1}`);
     }
@@ -68,7 +70,6 @@ const ButtonWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 2.4rem;
 `;
 
 export default TutorialPage;

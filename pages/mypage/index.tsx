@@ -5,14 +5,14 @@ import { useMypageQuery } from "~/hooks/mypage/useMypage";
 import Button from "~/components/Button";
 import { useAuthActions } from "~/context/auth";
 import { ParsedStorage } from "~/utils/storage";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import routes from "~/constants/routes";
+import { useInterface } from "~/utils/interface";
 
 const MyPage: NextPageWithLayout = () => {
-  const router = useRouter();
   const data = useMypageQuery();
   const { clearUser } = useAuthActions();
+  const { clearNavigation } = useInterface();
 
   // @ts-ignore
   const { name, age, address } = data;
@@ -20,7 +20,7 @@ const MyPage: NextPageWithLayout = () => {
   const handleSignOut = () => {
     clearUser();
     ParsedStorage.removeItem("authToken");
-    router.replace("/signin");
+    clearNavigation({ nextUrl: routes.SIGN_IN });
   };
 
   return (
@@ -58,10 +58,10 @@ const MyPage: NextPageWithLayout = () => {
       <div style={{ marginTop: "60px", marginBottom: 40 }}>
         <Button>프로필 편집</Button>
       </div>
-      <div style={{ width: 375, height: 72 }}>
+      <div style={{ height: 72 }}>
         <Label>테마 설정</Label>
       </div>
-      <div style={{ width: 375, height: 89 }}>
+      <div style={{ height: 89 }}>
         <Label>알림 받기</Label>
         <div>
           <ThemeContent>
@@ -77,14 +77,7 @@ const MyPage: NextPageWithLayout = () => {
         </div>
       </div>
       <LogoutContainer>
-        <Label
-          onClick={() => {
-            ParsedStorage.removeItem("authToken");
-            router.replace(routes.SIGN_IN);
-          }}
-        >
-          로그아웃
-        </Label>
+        <Label onClick={handleSignOut}>로그아웃</Label>
       </LogoutContainer>
     </Container>
   );
@@ -113,6 +106,7 @@ const TextField = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
 
   label {
     ${({ theme }) => theme.typo.B3_R}
@@ -121,7 +115,6 @@ const TextField = styled.div`
   }
 
   input {
-    width: 169px;
     background-color: transparent;
     color: white;
     ${({ theme }) => theme.typo.B3_R};
@@ -134,7 +127,6 @@ const Container = styled.main`
   flex-direction: column;
   //justify-content: space-between;
   padding: 14rem 2rem 4.2rem;
-  height: 1057px;
 `;
 
 const Label = styled.label`
@@ -149,7 +141,7 @@ const ThemeContent = styled.text`
 `;
 
 const LogoutContainer = styled.div`
-  width: 375px;
+  width: 100%;
   height: 104px;
   padding-top: 15px;
 `;
