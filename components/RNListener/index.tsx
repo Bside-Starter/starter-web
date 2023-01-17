@@ -46,6 +46,7 @@ const RNListener = ({ children }: PropsWithChildren) => {
         case WebViewMessageType.SOCIAL_SIGN_IN_RESULT:
           const { payload: socialSignInResultPayload } =
             parseWebMessage<SocialSignInResultPayload>(webData);
+          console.log(socialSignInResultPayload);
           socialSignInMutation.mutate(socialSignInResultPayload, {
             onSuccess: (res) => {
               if (!res) return;

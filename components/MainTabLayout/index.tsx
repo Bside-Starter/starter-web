@@ -13,7 +13,6 @@ const MainTab = ({ children }: PropsWithChildren) => {
 
 const Main = styled.div`
   width: 100vw;
-  height: 100vh;
   //padding-bottom: 7.2rem;
 `;
 

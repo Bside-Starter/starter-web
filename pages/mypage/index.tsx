@@ -7,6 +7,7 @@ import { useAuthActions } from "~/context/auth";
 import { ParsedStorage } from "~/utils/storage";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import routes from "~/constants/routes";
 
 const MyPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -76,7 +77,14 @@ const MyPage: NextPageWithLayout = () => {
         </div>
       </div>
       <LogoutContainer>
-        <Label>로그아웃</Label>
+        <Label
+          onClick={() => {
+            ParsedStorage.removeItem("authToken");
+            router.replace(routes.SIGN_IN);
+          }}
+        >
+          로그아웃
+        </Label>
       </LogoutContainer>
     </Container>
   );

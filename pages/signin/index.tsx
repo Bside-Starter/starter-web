@@ -51,11 +51,13 @@ const SignIn = () => {
         </div>
         <div className={"social"}>
           <Button>로그인</Button>
-          <Button>카카오로 계속하기</Button>
+          <Button onClick={handleSocialSignIn("kakao")}>
+            카카오로 계속하기
+          </Button>
           <Button>애플로 계속하기</Button>
         </div>
       </Content>
-      <Footer onClick={() => replaceNavigation(`${routes.SIGN_UP}/${1}`)}>
+      <Footer onClick={() => pushNavigation(`${routes.SIGN_UP}/${1}`)}>
         이메일 회원가입하기
       </Footer>
     </Container>

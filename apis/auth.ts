@@ -14,22 +14,23 @@ export const requestSocialSignIn = async ({
   provider,
 }: SocialSignInInfoPayload): Promise<SignInResult | undefined> => {
   try {
-    // const response = await defaultRequest<User>({
-    //   method: axiosUtils.POST,
-    //   url: "/api/signin",
-    //   requestBody: {
-    //     pId,
-    //     accessToken,
-    //     provider,
-    //   },
-    // });
-    // const { data } = response;
-    // const token = "temp Token";
-    // return {
-    //   user: data,
-    //   token,
-    // };
-
+    const response = await defaultRequest<User>({
+      method: axiosUtils.POST,
+      url: "/api/auth/signin",
+      requestBody: {
+        pId,
+        accessToken,
+        provider,
+      },
+    });
+    const { data } = response;
+    const token = "temp Token";
+    return {
+      user: data,
+      token,
+    };
+  } catch (e) {
+    console.error(e);
     return {
       user: {
         name: "임다빈",
@@ -38,7 +39,5 @@ export const requestSocialSignIn = async ({
       },
       token: "temp Token",
     };
-  } catch (e) {
-    console.error(e);
   }
 };

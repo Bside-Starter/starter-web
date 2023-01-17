@@ -68,7 +68,7 @@ export class AppAxiosInstance {
   constructor(type: "main" | "mock") {
     switch (type) {
       case "main":
-        this.baseURL = "";
+        this.baseURL = "http://223.130.128.167";
         break;
       case "mock":
         this.baseURL = "";
@@ -96,3 +96,4 @@ export class AppAxiosInstance {
 }
 
 export const defaultAxios = new AppAxiosInstance("main");
+export const mockAxios = new AppAxiosInstance("mock");

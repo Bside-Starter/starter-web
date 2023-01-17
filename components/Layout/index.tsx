@@ -14,7 +14,6 @@ const StyledLayout = styled.div<{ deviceInfo: DeviceInfoPayload | null }>`
         ? `${deviceInfo.statusBarHeight / 10}rem`
         : 0}
     0;
-  height: 100vh;
 `;
 
 export default Layout;

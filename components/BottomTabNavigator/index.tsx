@@ -1,10 +1,13 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { bottomTabList } from "~/constants";
+import useSafeArea from "~/hooks/useSafeArea";
 import strings from "../../constants/strings";
 
 const BottomTabNavigator = () => {
   const router = useRouter();
+  const { safeAreaInset } = useSafeArea();
+
   const renderBottomTabButton = bottomTabList.map((v) => {
     const handleBottomTabClick = () => {
       router.push(v.to);
@@ -19,10 +22,17 @@ const BottomTabNavigator = () => {
     }
     return <TabButton onClick={handleBottomTabClick} key={v.title}></TabButton>;
   });
-  return <Container>{renderBottomTabButton}</Container>;
+  return (
+    <>
+      <Container safeAreaInset={safeAreaInset}>
+        {renderBottomTabButton}
+      </Container>
+      <SafeArea safeAreaInset={safeAreaInset} />
+    </>
+  );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ safeAreaInset: string | number }>`
   width: 100%;
   height: 5.5rem;
   padding: 0 2rem;
@@ -31,9 +41,18 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  bottom: 0;
+  bottom: ${({ safeAreaInset }) => safeAreaInset};
   left: 0;
   background-image: url("data:image/svg+xml,%3Csvg width='375' height='64' viewBox='0 0 375 64' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M188 36C205.155 36 219.507 24.0008 223.122 7.93758C224.092 3.6271 227.582 0 232 0H375V64H0V0H144C148.418 0 151.908 3.6271 152.878 7.93758C156.493 24.0008 170.845 36 188 36Z' fill='%23121212'/%3E%3C/svg%3E%0A");
+`;
+
+const SafeArea = styled.div<{ safeAreaInset: string | number }>`
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  height: ${({ safeAreaInset }) => safeAreaInset};
+  background-color: #121212;
 `;
 
 const TabButton = styled.div`

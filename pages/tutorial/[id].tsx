@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Button from "~/components/Button";
-import Typo from "~/components/Typo";
 import routes from "~/constants/routes";
 import { useInterface } from "~/utils/interface";
 import { ParsedStorage } from "~/utils/storage";
@@ -23,10 +22,8 @@ const TutorialPage = () => {
     }
   };
 
-  const handleSkip = () => {};
   return (
     <Container>
-      <Typo>배포 테스트 중2</Typo>
       <div>
         <Title>{matchedItem?.title}</Title>
         <Desc>{matchedItem?.desc}</Desc>
@@ -42,15 +39,7 @@ const TutorialPage = () => {
             />
           </>
         ) : (
-          <>
-            <Button title={"다음"} hasNextButton onClick={handleNext} />
-            <Button
-              title={"우선 둘러보기"}
-              buttonType={"outline"}
-              hasNextButton
-              onClick={handleSkip}
-            />
-          </>
+          <Button title={"다음"} hasNextButton onClick={handleNext} />
         )}
       </ButtonWrap>
     </Container>
