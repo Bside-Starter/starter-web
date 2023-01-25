@@ -7,6 +7,7 @@ interface Props {
   onChange?: () => {};
   style?: CSSProperties;
   type?: string;
+  name?: string;
 }
 
 const TextField = ({
@@ -64,7 +65,7 @@ const EleInput = styled.input`
   padding: 0 15px;
   gap: 192px;
 
-  width: 333px;
+  width: 100%;
   height: 52px;
 
   border: 1px solid #7f848b;
@@ -88,7 +89,7 @@ const Container = styled.div<{ label?: string }>`
   padding: 0;
   gap: 4px;
 
-  width: 333px;
+  width: 100%;
 
   flex: none;
   order: 0;

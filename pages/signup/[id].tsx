@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 import { useInterface } from "~/utils/interface";
 import styled from "styled-components";
@@ -6,6 +6,8 @@ import Button from "~/components/Button";
 import { ParsedStorage } from "~/utils/storage";
 import routes from "~/constants/routes";
 import TextField from "~/components/TextField";
+import Header from "~/components/Header";
+import useInput from "~/hooks/useInput";
 
 const SignUp = () => {
   const router = useRouter();
@@ -13,7 +15,6 @@ const SignUp = () => {
   const id = parseInt(router.query.id as string, 10);
 
   const inputRef = React.useRef<any>([]);
-
   const setAccordion = (value: number) => {
     const isVisible = inputRef.current[value].classList.contains("active");
     isVisible
@@ -21,13 +22,31 @@ const SignUp = () => {
       : inputRef.current[value].classList.add("active");
   };
 
+  const [email, onChangeEmail] = useInput("");
+  const [password, onChangePassword] = useInput("");
+  const [username, onChangeUsername] = useInput("");
+  const [nickname, onChangeNickname] = useInput("");
+  const [passwordError, setPasswordError] = useState(false);
+
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const onChangePasswordCheck = useCallback(
+    (e: any) => {
+      setPasswordCheck(e.target.value);
+      setPasswordError(e.target.value !== password);
+    },
+    [password]
+  );
   const signupList = [
     {
       id: 1,
-      header: <SignUpHeader>회원가입하기</SignUpHeader>,
+      header: <SignUpHeader title={"회원가입하기"} backButtonShown={false} />,
       content: (
         <FieldContainer>
-          <TextField label={"이메일"} placeholder={"예) user@sample.com"} />
+          <TextField
+            name={"email"}
+            label={"이메일"}
+            placeholder={"예) user@sample.com"}
+          />
           <TextField
             type={"password"}
             label={"비밀번호"}
@@ -45,7 +64,7 @@ const SignUp = () => {
     },
     {
       id: 2,
-      header: <SignUpHeader>약관동의</SignUpHeader>,
+      header: <SignUpHeader title={"약관동의"} backButtonShown={true} />,
       content: (
         <div>
           <Agree>
@@ -97,8 +116,10 @@ const SignUp = () => {
 
   return (
     <Container>
-      {matchedItem?.header}
-      {matchedItem?.content}
+      <div>
+        {matchedItem?.header}
+        {matchedItem?.content}
+      </div>
       <ButtonWrap>
         <Button
           title={matchedItem?.buttonTitle}
@@ -113,23 +134,18 @@ const SignUp = () => {
 const FieldContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: 100%;
 `;
 
-const SignUpHeader = styled.div`
-  position: absolute;
-  //width: 375px;
-  height: 56px;
-  top: 50px;
-
-  ${({ theme }) => theme.typo.B3_R}
-`;
+const SignUpHeader = styled(Header)``;
 
 const Agree = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
+
+  position: relative;
 
   margin-bottom: 16px;
 
